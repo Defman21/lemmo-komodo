@@ -1,0 +1,396 @@
+def _(val):
+    if type(val) == int:
+        return val
+
+    val = val.lstrip('#')
+    if len(val) == 3:
+        val += val
+
+    r,g,b = int(val[:2], 16), int(val[2:4], 16), int(val[4:], 16)
+    color = r+g*256+b*256*256
+    return color
+
+COLORS = {
+    'ba': _("#1f2021"), # background
+    'fo': _("#e2e8ea"), # foreground
+    'c': _("#928d8d"),  # comments
+    'e': _("#d61111"),  # errors
+    'y': _("#ffce2d"),  # yellow
+    'g': _("#65c158"),  # green
+    'p': _("#ff4488"),  # pink
+    'r': _("#ff4488"),  # red (dup: pink)
+    'b': _("#1cd3ea"),  # blue
+    's': _("#83cdef"),  # search bg
+    'm': _("#ef83cd"),  # match bg
+    'ln': _("#909090"), # line number foreground
+    'cl': _("#505050"), # current line background
+    'bhl': _("#791900"),# brackets highlight,
+    'sel': _("#38393A") # selection
+}
+
+def parseScheme(c):
+    return {
+
+        'Version': 15,
+
+        'Booleans': {
+            'caretLineVisible': True,
+            'preferFixed': True,
+            'useSelFore': False
+        },
+
+        'CommonStyles': {
+            'attribute name': {
+                'fore': c["y"]
+            },
+            'attribute value': {
+                'fore': c["p"]
+            },
+            'bracebad': {
+                'fore': c["fo"]
+            },
+            'bracehighlight': {
+                'fore': c["fo"],
+                'back': c["g"]
+            },
+            'classes': {
+                'fore': c["y"]
+            },
+            'comments': {
+                'fore': c["c"],
+                'italic': True
+            },
+            'control characters': {
+                'fore': c["y"]
+            },
+            'default_fixed': {
+                'back': c["ba"],
+                'eolfilled': 0,
+                'face': 'Monaco, "Source Code Pro", Consolas, Inconsolata, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", Menlo, Monaco, "Courier New", Courier, Monospace',
+                'fore': c["fo"],
+                'hotspot': 0,
+                'italic': 0,
+# #if PLATFORM == "darwin"
+                'size': 13,
+# #else
+                'size': 11,
+# #endif
+
+                'useFixed': 1,
+                'bold': 0,
+                'lineSpacing': 2
+            },
+            'default_proportional': {
+                'back': c["ba"],
+                'eolfilled': 0,
+                'face': '"DejaVu Sans", "Bitstream Vera Sans", Helvetica, Tahoma, Verdana, sans-serif',
+                'fore': c["fo"],
+                'hotspot': 0,
+                'italic': 0,
+# #if PLATFORM == "darwin"
+                'size': 13,
+# #else
+                'size': 11,
+# #endif
+                'useFixed': 0,
+                'bold': 0,
+                'lineSpacing': 2
+            },
+            'fold markers': {
+                'fore': c["c"],
+                'back': c["ba"]
+            },
+            'functions': {
+                'fore': c["b"]
+            },
+            'identifiers': {
+                'fore': c["y"]
+            },
+            'indent guides': {
+                'fore': c["fo"]
+            },
+            'keywords': {
+                'fore': c["g"]
+            },
+            'keywords2': {
+                'fore': c["b"]
+            },
+            'linenumbers': {
+                'back': c["ba"],
+                'fore': c["ln"],
+                'size': 10,
+                'useFixed': True,
+                'bold': False
+            },
+            'numbers': {
+                'fore': c["b"]
+            },
+            'operators': {
+                'fore': c["fo"]
+            },
+            'preprocessor': {
+                'fore': c["fo"]
+            },
+            'regex': {
+                'fore': c["p"]
+            },
+            'match_highlight': {
+                'fore': c["fo"],
+                'back': c["m"]
+            },
+            'stderr': {
+                'fore': c["e"]
+            },
+            'stdin': {
+                'fore': c["g"]
+            },
+            'stdout': {
+                'fore': c["y"]
+            },
+            'stringeol': {
+                'back': c["fo"],
+                'eolfilled': True
+            },
+            'strings': {
+                'fore': c["p"]
+            },
+            'tags': {
+                'fore': c["g"]
+            },
+            'variables': {
+                'fore': c["b"]
+            }
+        },
+
+        'LanguageStyles': {
+            'CSS': {
+                'ids': {
+                    'fore': c["g"]
+                },
+                'values': {
+                    'fore': c["p"]
+                },
+                'classes': {
+                    'fore': c['g']
+                }
+            },
+            'Diff': {
+                'additionline': {
+                    'fore': c["g"]
+                },
+                'chunkheader': {
+                    'fore': c["fo"]
+                },
+                'deletionline': {
+                    'fore': c["r"]
+                },
+                'diffline': {
+                    'fore': c["y"]
+                },
+                'fileline': {
+                    'fore': c["fo"]
+                }
+            },
+            'Errors': {
+                'Error lines': {
+                    'fore': c["e"],
+                    'hotspot': 1,
+                    'italic': 1
+                }
+            },
+            'HTML': {
+                'attributes': {
+                    'fore': c["g"]
+                },
+                'cdata': {
+                    'fore': c["y"]
+                },
+                'cdata content': {
+                    'fore': c["fo"]
+                },
+                'cdata tags': {
+                    'fore': c["fo"]
+                },
+                'xpath attributes': {
+                    'fore': c["b"]
+                }
+            },
+            'HTML5': {
+                'attributes': {
+                    'fore': c["g"]
+                },
+                'cdata': {
+                    'fore': c["y"]
+                },
+                'cdata content': {
+                    'fore': c["fo"]
+                },
+                'cdata tags': {
+                    'fore': c["fo"]
+                },
+                'xpath attributes': {
+                    'fore': c["b"]
+                }
+            },
+            'XML': {
+                'attributes': {
+                    'fore': c["g"]
+                },
+                'cdata': {
+                    'fore': c["y"]
+                },
+                'cdata content': {
+                    'fore': c["fo"]
+                },
+                'cdata tags': {
+                    'fore': c["fo"]
+                },
+                'xpath attributes': {
+                    'fore': c["b"]
+                }
+            },
+            'JavaScript': {
+                'commentdockeyword': {
+                    'fore': c["c"]
+                },
+                'commentdockeyworderror': {
+                    'fore': c["e"]
+                },
+                'globalclass': {
+                    'fore': c["y"]
+                }
+            },
+            'PHP': {
+                'commentdockeyword': {
+                    'fore': c["c"]
+                },
+                'commentdockeyworderror': {
+                    'fore': c["e"]
+                }
+            },
+            'Python': {
+                'functions': {
+                    'fore': c['y']
+                }
+            },
+            'Python3': {
+                'functions': {
+                    'fore': c['y']
+                }
+            }
+        },
+
+        'MiscLanguageSettings': {},
+
+        'Colors': {
+            'bookmarkColor': c["ba"],
+            'callingLineColor': c["ba"],
+            'caretFore': c["fo"],
+            'caretLineBack': c["ba"],
+            'changeMarginDeleted': c["r"],
+            'changeMarginInserted': c["g"],
+            'changeMarginReplaced': c["y"],
+            'currentLineColor': c["ba"],
+            'edgeColor': c["ba"],
+            'foldMarginColor': c["ba"],
+            'selBack': c["sel"],
+            'selFore': c["fo"],
+            'whitespaceColor': c["ba"]
+        },
+
+        'Indicators': {
+            'collab_local_change': {
+                'alpha': 0,
+                'color': c["g"],
+                'draw_underneath': False,
+                'style': 5
+            },
+            'collab_remote_change': {
+                'alpha': 255,
+                'color': c["b"],
+                'draw_underneath': True,
+                'style': 0
+            },
+            'collab_remote_cursor_1': {
+                'alpha': 100,
+                'color': c["b"],
+                'draw_underneath': True,
+                'style': 8
+            },
+            'collab_remote_cursor_2': {
+                'alpha': 100,
+                'color': c["y"],
+                'draw_underneath': True,
+                'style': 8
+            },
+            'collab_remote_cursor_3': {
+                'alpha': 100,
+                'color': c["r"],
+                'draw_underneath': True,
+                'style': 8
+            },
+            'collab_remote_cursor_4': {
+                'alpha': 100,
+                'color': c["y"],
+                'draw_underneath': True,
+                'style': 8
+            },
+            'collab_remote_cursor_5': {
+                'alpha': 100,
+                'color': c["b"],
+                'draw_underneath': True,
+                'style': 8
+            },
+            'find_highlighting': {
+                'alpha': 100,
+                'color': c["s"],
+                'draw_underneath': True,
+                'style': 8
+            },
+            'linter_error': {
+                'alpha': 255,
+                'color': c["e"],
+                'draw_underneath': True,
+                'style': 13
+            },
+            'linter_warning': {
+                'alpha': 255,
+                'color': c["y"],
+                'draw_underneath': True,
+                'style': 13
+            },
+            'soft_characters': {
+                'alpha': 255,
+                'color': c["ba"],
+                'draw_underneath': False,
+                'style': 0
+            },
+            'tabstop_current': {
+                'alpha': 255,
+                'color': c["ba"],
+                'draw_underneath': True,
+                'style': 8
+            },
+            'tabstop_pending': {
+                'alpha': 255,
+                'color': c["ba"],
+                'draw_underneath': True,
+                'style': 6
+            },
+            'tag_matching': {
+                'alpha': 255,
+                'color': c["b"],
+                'draw_underneath': False,
+                'style': 0
+            },
+            'spelling_error': {
+                'alpha': 255,
+                'color': c["y"],
+                'draw_underneath': True,
+                'style': 3
+            }
+        }
+
+    }
+
+exports = parseScheme(COLORS)
