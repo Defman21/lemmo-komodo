@@ -25,7 +25,9 @@ COLORS = {
     'ln': _("#909090"), # line number foreground
     'cl': _("#505050"), # current line background
     'bhl': _("#791900"),# brackets highlight,
-    'sel': _("#38393A") # selection
+    'sel': _("#38393A"),# selection
+    'tbc': _("#474849"),# tabstop current
+    'tbp': _("#474846") # tabstop pending
 }
 
 def parseScheme(c):
@@ -367,13 +369,13 @@ def parseScheme(c):
             },
             'tabstop_current': {
                 'alpha': 255,
-                'color': c["ba"],
+                'color': c["tbc"],
                 'draw_underneath': True,
                 'style': 8
             },
             'tabstop_pending': {
                 'alpha': 255,
-                'color': c["ba"],
+                'color': c["tbp"],
                 'draw_underneath': True,
                 'style': 6
             },
