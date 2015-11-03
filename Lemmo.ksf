@@ -52,8 +52,8 @@ def parseScheme(c):
                 'fore': c["fo"]
             },
             'bracehighlight': {
-                'fore': c["fo"],
-                'back': c["g"]
+                'fore': c["g"],
+                'back': c["ba"]
             },
             'classes': {
                 'fore': c["y"]
