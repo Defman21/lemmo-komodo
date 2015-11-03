@@ -350,16 +350,16 @@ def parseScheme(c):
                 'style': 8
             },
             'linter_error': {
-                'alpha': 255,
+                'alpha': 130,
                 'color': c["e"],
                 'draw_underneath': True,
-                'style': 13
+                'style': 8
             },
             'linter_warning': {
-                'alpha': 255,
+                'alpha': 65,
                 'color': c["y"],
                 'draw_underneath': True,
-                'style': 13
+                'style': 8
             },
             'soft_characters': {
                 'alpha': 255,
@@ -380,10 +380,10 @@ def parseScheme(c):
                 'style': 6
             },
             'tag_matching': {
-                'alpha': 255,
+                'alpha': 45,
                 'color': c["b"],
-                'draw_underneath': False,
-                'style': 0
+                'draw_underneath': True,
+                'style': 8
             },
             'spelling_error': {
                 'alpha': 255,
